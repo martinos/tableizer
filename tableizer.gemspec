@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Martin Chabot"]
   s.email       = ["chabotm@gmail.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/martinos/tableizer"
   s.summary     = %q{Converts Ruby objects into tables}
   s.description = %q{Converts Ruby objects into tables}
 
