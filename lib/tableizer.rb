@@ -1,3 +1,3 @@
 module Tableizer
-  # Your code goes here...
+  # Your code goes here..
 end
