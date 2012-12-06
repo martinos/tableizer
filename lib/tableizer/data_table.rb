@@ -1,15 +1,4 @@
 require 'csv'
-# require 'prawn/core'
-# require 'prawn/table'
-
-begin
-  require 'fastercsv'
-  NewCSV = FasterCSV
-rescue Exception => e
-  require 'csv'
-  NewCSV = CSV
-end
-
 
 class ColInfo
   attr_reader :header 
@@ -31,9 +20,9 @@ class DataTable
   end
 
   def to_csv
-    NewCSV.generate do |csv|
+    CSV.generate do |csv|
       csv << cols_info.map{|col_info| col_info.header}
-      rows.each do |row|
+        rows.each do |row|
         conv_row = row.map do |a| 
           a.class == Time ? a.strftime("%Y-%m-%d %H:%M:%S") : a
         end

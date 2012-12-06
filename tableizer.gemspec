@@ -17,6 +17,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'pry-doc'
   gem.add_development_dependency 'pry-stack_explorer'
   gem.add_development_dependency 'pry-remote'
+
   gem.add_development_dependency "guard"
   gem.add_development_dependency "guard-minitest"
   gem.add_development_dependency 'rb-fsevent'
@@ -25,8 +26,8 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'debugger'
   gem.authors       = ["Martin Chabot"]
   gem.email         = ["chabotm@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{Adds the ability to Enumerable to generate tables into different formats}
+  gem.summary       = %q{Adds the ability to Enumerable to generate tables into different formats}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($/)
