@@ -62,7 +62,6 @@ DEPENDENCIES
   guard-minitest
   minitest
   minitest_should
-  pry
   pry-doc
   pry-nav
   pry-rails
