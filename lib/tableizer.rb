@@ -1,5 +1,6 @@
 require "tableizer/version"
 
 module Tableizer
-  # Your code goes here...
+  autoload :Table, 'tableizer/table'
+  autoload :ColInfo, 'tableizer/col_info'
 end

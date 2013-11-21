@@ -9,8 +9,3 @@ class ColInfo
   end
 end
 
-module Enumerable
-  def table(&block)
-    Tableizer::Table.create(self, &block)
-  end
-end

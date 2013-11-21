@@ -1,7 +1,7 @@
 require 'csv'
 
 module Tableizer
-  class DataTable
+  class Table
     attr_reader :rows, :cols_info
 
     def initialize(cols_info, rows)

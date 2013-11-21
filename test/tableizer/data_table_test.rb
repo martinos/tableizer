@@ -3,14 +3,13 @@ $LOAD_PATH << (File.join(File.expand_path(File.dirname(__FILE__)),'..', 'lib'))
 require_relative '../test_helper'
 
 require 'tableizer/data_table'
-require 'tableizer/table'
 
 module Tableizer
   class TestDataTable < MiniTest::Should::TestCase
 
     context "A enumerable" do
       should "return a DataTable" do
-        assert_kind_of(DataTable, [ 1,2,3 ].table{|a| [[ "Col1", a ],["Col2", a + 1] ]})
+        assert_kind_of(Table, [ 1,2,3 ].table{|a| [[ "Col1", a ],["Col2", a + 1] ]})
       end
     end
 
