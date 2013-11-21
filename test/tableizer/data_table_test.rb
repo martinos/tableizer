@@ -56,6 +56,16 @@ col1,col2
 EOF
         assert_equal( expected, @table.to(:csv) )
       end
+
+      should "convert to text" do
+        expected = <<EOF
+col1|col2
+   1|   2
+   2|    
+   3|   4
+EOF
+       assert_equal expected.chomp, @table.to(:text) 
+      end
     end
 
     context "A Valid table containing Time value should be convert to ISO 8601 string" do 
