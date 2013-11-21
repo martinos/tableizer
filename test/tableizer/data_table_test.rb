@@ -1,5 +1,7 @@
 $LOAD_PATH << (File.join(File.expand_path(File.dirname(__FILE__)),'..', 'lib'))
+
 require_relative '../test_helper'
+
 require 'tableizer/data_table'
 
 class TestDataTable < MiniTest::Should::TestCase
@@ -25,6 +27,7 @@ class TestDataTable < MiniTest::Should::TestCase
     should "detect the column types" do
       assert_equal( [Fixnum, String], @table.cols_info.map{|col| col.col_type} )
     end
+
     should "detect the columns width" do
       assert_equal([4,5], @table.cols_info.map{|col|  col.width}  )
     end
@@ -37,9 +40,11 @@ class TestDataTable < MiniTest::Should::TestCase
             [ "col2", elem == 2 ? nil : (elem + 1).to_s ] ]
       end
     end
+
     should "detect the column type" do
       assert_equal( [Fixnum, String], @table.cols_info.map{|col_info| col_info.col_type })
     end
+
     should "be convertable to csv" do
       expected = <<EOF
 col1,col2
@@ -52,16 +57,19 @@ EOF
   end
 
   context "A Valid table containing Time value should be convert to ISO 8601 string" do 
-    @table = [Time.local(2009,12,1, 13,44,23)].table do |elem| 
+    setup  do
+      @table = [Time.local(2009,12,1, 13,44,23)].table do |elem| 
         [ [ "col1", elem ]] 
+      end
     end
+
     should "Convert time to UTC" do 
       expected = <<EOF
 col1
-2009-12-01 18:44:31
+2009-12-01 13:44:23
 EOF
+      assert_equal expected, @table.to_csv
     end
   end
-
 end
 
