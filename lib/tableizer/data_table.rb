@@ -12,6 +12,6 @@ end
 
 module Enumerable
   def table(&block)
-    DataTable.create(self, &block)
+    Tableizer::DataTable.create(self, &block)
   end
 end
