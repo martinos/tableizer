@@ -6,11 +6,17 @@ module Tableizer
       CSV.generate do |csv|
         csv << cols_info.map{|col_info| col_info.header}
         rows.each do |row|
-          conv_row = row.map do |a| 
-            a.class == Time ? a.strftime("%Y-%m-%d %H:%M:%S") : a
-          end
-          csv << conv_row
+          csv << row.map { |col| convert(col) }
         end
+      end
+    end
+
+    def convert(data)
+      case data
+      when Time
+        data.strftime("%Y-%m-%d %H:%M:%S")
+      else
+        data
       end
     end
   end

@@ -65,22 +65,5 @@ module Tableizer
     def to_google_table
       GoogleVisualization.render( rows, cols_info.map{|col| [col.col_type, col.header]} )
     end
-
-    # def to_pdf
-    #   pdf = Prawn::Document.new(:top_margin => 50, :page_layout => :landscape)
-
-    #   data = rows.map do |row|
-    #     row.zip(cols_info).map do |(col, col_info)| 
-    #       col 
-    #     end
-    #   end
-    #   data
-    #   pdf.table(  data, :border_style => :grid,
-    #               :headers => cols_info.map{|col_info| col_info.header},
-    #               :font_size => 7,
-    #               :vertical_padding => 1
-    #                ) 
-    #   pdf.render
-    # end
   end
 end
