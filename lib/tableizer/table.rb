@@ -1,6 +1,16 @@
 require 'csv'
 
 module Tableizer
+  class NullObject
+    def method_missing(*args, &block)
+      self
+    end
+
+    def nil?
+      true
+    end
+  end
+
   class Table
     attr_reader :rows, :cols_info
 
@@ -9,24 +19,24 @@ module Tableizer
       @cols_info = cols_info
     end
 
-    def self.create(enum)
+    def self.create(elems)
       rows = []
       cols_info = [] 
       gen = nil
-      enum.each do |elem|
-        ret = yield elem
-        rows << ret.map{|col| col[1]}
+      
+      elems = [NullObject] if elems.first.nil?
+      elems.each do |elem|
+        yielded = yield elem
+        rows << yielded.map{|col| col[1]}
         unless cols_info.empty? 
-          ret.zip(cols_info).each do |(row, col_info)|
+          yielded.zip(cols_info).each do |(row, col_info)|
             # Detect the type of the current column
             if col_info.col_type == NilClass && row[1].class != NilClass
               col_info.col_type = row[1].class
             end
-          # Detect the max width the current column
-          col_info.width = [ col_info.width, row[1].to_s.strip.length ].max
           end
         else
-          cols_info = ret.map do |(header, val)|  
+          cols_info = yielded.map do |(header, val)|  
             ColInfo.new( header.to_s, val.class, [ header.to_s.strip.length, val.to_s.strip.length ].max )
           end
         end

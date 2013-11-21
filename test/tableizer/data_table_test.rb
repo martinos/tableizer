@@ -29,15 +29,23 @@ module Tableizer
       should "detect the column types" do
         assert_equal( [Fixnum, String], @table.cols_info.map{|col| col.col_type} )
       end
-
-      should "detect the columns width" do
-        assert_equal([4, 5], @table.cols_info.map{|col| col.width}  )
-      end
     end 
+
+    context "An empty enumerable" do
+      setup do
+        enum = []
+        @table = enum.table{|a| [[:name, a.name]]}
+      end
+
+      should 'generate header' do
+        assert_equal 'name', @table.cols_info.first.header
+        # assert_equal 0, @table.rows.length
+      end
+    end
 
     context "A Valid table with containing nil value" do
       setup do
-        @table = [1, 2, 3].table do |elem| 
+        @table = [1, 2, 3].table do |elem|
           [ [ "col1", elem ], 
             [ "col2", elem == 2 ? nil : (elem + 1).to_s ] ]
         end
