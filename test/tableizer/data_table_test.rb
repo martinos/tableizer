@@ -9,21 +9,21 @@ module Tableizer
 
     context "A enumerable" do
       should "return a DataTable" do
-        assert_kind_of(Table, [ 1,2,3 ].table{|a| [[ "Col1", a ],["Col2", a + 1] ]})
+        assert_kind_of(Table, [1, 2, 3].table{|a| [["Col1", a], ["Col2", a + 1]]})
       end
     end
 
     context "A valid DataTable" do
       setup do
-        @table = [ 1,2,3 ].table{|elem| [ ["col1",elem * 2], ["col2", elem == 3 ? "60000" : (elem * 2 + 1).to_s] ] }
+        @table = [1, 2, 3].table{ |elem| [ ["col1", elem * 2], ["col2", elem == 3 ? "60000" : (elem * 2 + 1).to_s] ] }
       end
 
       should "return the collected rows" do
-        assert_equal( [[2,"3"],[4,"5"],[6,"60000"]], @table.rows )
+        assert_equal( [[2, "3"], [4, "5"],[ 6, "60000"]], @table.rows )
       end
 
       should "return the headers" do
-        assert_equal( ["col1","col2"], @table.cols_info.map{|col| col.header} )
+        assert_equal( ["col1", "col2"], @table.cols_info.map{|col| col.header} )
       end
 
       should "detect the column types" do
@@ -31,7 +31,7 @@ module Tableizer
       end
 
       should "detect the columns width" do
-        assert_equal([4,5], @table.cols_info.map{|col|  col.width}  )
+        assert_equal([4, 5], @table.cols_info.map{|col| col.width}  )
       end
     end 
 
@@ -54,13 +54,13 @@ col1,col2
 2,
 3,4
 EOF
-        assert_equal( expected, @table.to_csv )
+        assert_equal( expected, @table.to(:csv) )
       end
     end
 
     context "A Valid table containing Time value should be convert to ISO 8601 string" do 
       setup  do
-        @table = [Time.local(2009,12,1, 13,44,23)].table do |elem| 
+        @table = [Time.local(2009, 12, 1, 13, 44, 23)].table do |elem| 
           [ [ "col1", elem ]] 
         end
       end
@@ -70,7 +70,7 @@ EOF
 col1
 2009-12-01 13:44:23
 EOF
-        assert_equal expected, @table.to_csv
+        assert_equal expected, @table.to(:csv)
       end
     end
   end

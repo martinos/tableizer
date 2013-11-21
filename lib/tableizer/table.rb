@@ -34,16 +34,9 @@ module Tableizer
       self.new(cols_info,rows)
     end
 
-    def to_csv
-      CSV.generate do |csv|
-        csv << cols_info.map{|col_info| col_info.header}
-        rows.each do |row|
-          conv_row = row.map do |a| 
-            a.class == Time ? a.strftime("%Y-%m-%d %H:%M:%S") : a
-          end
-          csv << conv_row
-        end
-      end
+    def to(table_type)
+      mapper = {:csv => CsvTable}
+      mapper.fetch(table_type).new.to_s(cols_info, rows)
     end
 
     def to_text
