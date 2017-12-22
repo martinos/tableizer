@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tableizer (0.0.3)
+    tableizer (0.0.4)
 
 GEM
   remote: https://rubygems.org/
